@@ -1,0 +1,52 @@
+plugins {
+    id 'scala'
+    id 'idea'
+
+    // https://github.com/melix/jmh-gradle-plugin
+    id 'me.champeau.gradle.jmh' version '0.3.1'
+}
+
+group 'com.mariolopezjr'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+jmh {
+    jmhVersion = '1.17.4'
+
+    // necessary if you have both Java and Scala benchmarks
+    duplicateClassesStrategy = 'warn'
+
+    // optional parameters for benchmarking
+    // for more options: https://github.com/melix/jmh-gradle-plugin#configuration-options
+    iterations = 10
+    benchmarkMode = ['avgt']
+    fork = 1
+    forceGC = false
+    profilers = ['comp', 'gc']
+    timeout = '2s'
+    timeUnit = 'us'
+    warmupIterations = 5
+    warmupMode = 'INDI'
+}
+
+dependencies {
+    compile 'org.scala-lang:scala-library:2.12.1'
+
+    testCompile 'org.scalatest:scalatest_2.12:3.0.1'
+
+    jmh 'org.openjdk.jmh:jmh-core:1.17.4'
+    jmh 'org.openjdk.jmh:jmh-generator-annprocess:1.17.4'
+}
+
+idea {
+    module {
+        // marks the Scala source directory correctly in IntelliJ
+        testSourceDirs += sourceSets.jmh.scala.srcDirs
+    }
+}
