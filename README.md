@@ -1,3 +1,5 @@
+# Gradle, JMH, Scala, and IntelliJ
+
 I found that writing JMH benchmarks in Scala using IntelliJ with Gradle as my build tool was non-trivial,
 so I created this example project as a proof of concept.
 
@@ -17,12 +19,12 @@ This part is straightforward as there is a great plugin that will set up the Gra
 https://github.com/melix/jmh-gradle-plugin
 
 The plugin supports multiple JVM languages and works with Java out of the box.
-Java benchmarks should be placed in the `src/jmh/java` directory,
-and you would run JMH using `./gradlew jmh`.
+Java benchmarks would be placed in the `src/jmh/java` directory,
+and you could run JMH using `./gradlew jmh`.
 
 ## Benchmarks in Scala
 
-You can add support for Scala as you normally would in a Gradle build.
+You can add support for Scala as you normally would in a Gradle build to enable writing benchmarks in Scala.
 
 ```groovy
 plugins {
@@ -39,20 +41,15 @@ dependencies {
 }
 ```
 
-With this setup, Scala benchmarks should be placed in the `src/jmh/scala` directory.
+With this setup, Scala benchmarks would be placed in the `src/jmh/scala` directory.
 
 ## Coding in IntelliJ
 
-My hope was to be able to easily run the JMH benchmarks from within IntelliJ,
-but unfortunately the only JMH plugin for IntelliJ exclusively supports Java.
-You can still do so by running the `jmh` Gradle task from within IntelliJ,
-but at that point, it doesn't really buy you anything over running it from the command line.
-
 In addition to adding the `idea` plugin to the Gradle build,
-you also have to tell IntelliJ to treat the Scala directory like test code in order to find all of the JMH dependencies.
-Also, when I tried running `./gradlew idea` and opening the generated IntelliJ project,
+you also have to tell IntelliJ to treat the JMH Scala directory like test code in order to find all of the JMH dependencies.
+Also, when I tried running `./gradlew idea` and opened the generated IntelliJ project,
 I saw some odd behavior.
-I found it easier to avoid the Gradle-generated IntelliJ project and to let IntelliJ import the Gradle project itself.
+I found it easier to avoid the Gradle-generated IntelliJ project and to let IntelliJ import the Gradle project instead.
 
 ```groovy
 plugins {
@@ -90,3 +87,10 @@ jmh {
 ```
 
 See the JMH Gradle Plugin README section [Duplicate dependencies and classes](https://github.com/melix/jmh-gradle-plugin#duplicate-dependencies-and-classes) for more details.
+
+### Running in IntelliJ
+
+My hope was to be able to easily run the JMH benchmarks from within IntelliJ,
+but unfortunately the only JMH plugin for IntelliJ exclusively supports Java.
+You can still do so by running the `jmh` Gradle task from within IntelliJ,
+but at that point, it doesn't really buy you anything over running it from the command line.
