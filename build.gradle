@@ -25,14 +25,14 @@ jmh {
 
     // optional parameters for benchmarking
     // for more options: https://github.com/melix/jmh-gradle-plugin#configuration-options
-    iterations = 10
+    iterations = 25
     benchmarkMode = ['avgt']
     fork = 1
     forceGC = false
-    profilers = ['comp', 'gc']
-    timeout = '2s'
+    profilers = ['comp']//, 'gc']
+    timeout = '5s'
     timeUnit = 'us'
-    warmupIterations = 5
+    warmupIterations = 0
     warmupMode = 'INDI'
 }
 

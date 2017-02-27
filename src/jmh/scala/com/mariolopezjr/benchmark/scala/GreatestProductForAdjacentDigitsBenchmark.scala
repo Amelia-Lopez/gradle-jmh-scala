@@ -62,7 +62,7 @@ class GreatestProductForAdjacentDigitsBenchmark {
     Data.slice(maxValPos, maxValPos + numOfDigits).foldLeft(1L)(_ * _)
   }
 
-  @Benchmark
+  //@Benchmark
   def usingMapAndMaxBy(): Long = {
     val maxPos = Data.length - numOfDigits
 
@@ -74,7 +74,7 @@ class GreatestProductForAdjacentDigitsBenchmark {
     Data.slice(maxValPos, maxValPos + numOfDigits).foldLeft(1L)(_ * _)
   }
 
-  @Benchmark
+  //@Benchmark
   def usingReduce(): Long = {
     val maxPos = Data.length - numOfDigits
 
